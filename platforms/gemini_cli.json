@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "BeforeModel": [
+      {
+        "type": "command",
+        "command": "python3 ./scripts/entrypoint.py",
+        "timeout": 10
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": ".*",
+        "type": "command",
+        "command": "python3 ./scripts/entrypoint.py",
+        "timeout": 5
+      }
+    ]
+  }
+}

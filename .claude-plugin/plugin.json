@@ -1,0 +1,7 @@
+{
+  "name": "agent-pilot",
+  "version": "1.0.0",
+  "description": "Intelligent routing, workflow observation, and proactive optimization for AI coding agents",
+  "homepage": "https://github.com/mitul-s/agent-pilot",
+  "hooks": "./hooks/hooks.json"
+}

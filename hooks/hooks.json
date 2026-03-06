@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/entrypoint.py",
+        "timeout": 10
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "type": "command",
+        "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/entrypoint.py",
+        "timeout": 5
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/entrypoint.py",
+        "timeout": 5
+      }
+    ]
+  }
+}

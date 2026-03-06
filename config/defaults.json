@@ -1,0 +1,12 @@
+{
+  "routing": {
+    "enabled": true,
+    "auto_switch": true,
+    "default_model": "sonnet",
+    "always_opus_for": [],
+    "always_haiku_for": []
+  },
+  "observer": {
+    "enabled": true
+  }
+}
