@@ -1,0 +1,1 @@
+# hash_prompt lives in core/models.py per spec
