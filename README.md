@@ -40,10 +40,10 @@ Logs tool usage, routing decisions, and session metadata to `.agent-ninja/data/`
 
 ### Layer 3: Strategist (on-demand)
 Slash commands that Claude executes using its own capabilities:
-- `/ap:status` — quick dashboard
-- `/ap:audit` — environment health check
-- `/ap:strategize` — deep workflow analysis with proposals
-- `/ap:generate-skill` — create skills from repeated patterns
+- `/an:status` — quick dashboard
+- `/an:audit` — environment health check
+- `/an:strategize` — deep workflow analysis with proposals
+- `/an:generate-skill` — create skills from repeated patterns
 
 ## Configuration
 
@@ -62,6 +62,18 @@ Create `.agent-ninja/config.json` in your project:
   }
 }
 ```
+
+## Documentation
+
+Detailed documentation is available in the [`docs/`](docs/) directory:
+
+- **[Architecture](docs/architecture.md)** — Three-layer design, entry point dispatch, hook lifecycle, data flow
+- **[Routing Reference](docs/routing.md)** — Static rules, regex patterns, self-assessment, additionalContext injection
+- **[Observer Reference](docs/observer.md)** — Captured metadata, JSONL format, command classification, failure detection
+- **[Strategist & Slash Commands](docs/strategist.md)** — `/an:status`, `/an:audit`, `/an:strategize`, `/an:generate-skill`
+- **[Configuration Reference](docs/configuration.md)** — Precedence chain, all options, environment variables, example configs
+- **[Privacy Design](docs/privacy.md)** — What is/isn't stored, prompt hashing, data retention
+- **[Platform Support](docs/platforms.md)** — Claude Code vs Gemini CLI differences, setup instructions
 
 ## Development
 

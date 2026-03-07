@@ -5,7 +5,7 @@
 ### 1. Clone the repository
 
 ```bash
-git https://github.com/mitulgarg/agent-ninja
+git clone https://github.com/mitulgarg/agent-ninja
 ```
 
 ### 2. Set up hooks
