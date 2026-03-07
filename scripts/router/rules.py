@@ -7,7 +7,7 @@ from __future__ import annotations
 import re
 from typing import Optional
 
-from core.config import AgentPilotConfig
+from core.config import AgentNinjaConfig
 from core.models import (
     AgentPattern,
     ModelTier,
@@ -42,7 +42,7 @@ PLAN_PATTERNS = [
 class StaticRules:
     """Pattern-based routing that skips the LLM call."""
 
-    def __init__(self, config: AgentPilotConfig):
+    def __init__(self, config: AgentNinjaConfig):
         self.config = config
         self._opus_extra = [
             re.compile(p, re.IGNORECASE) for p in config.always_opus_for

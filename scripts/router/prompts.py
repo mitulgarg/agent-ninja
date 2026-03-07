@@ -1,4 +1,4 @@
-"""Prompt templates for Agent Pilot routing.
+"""Prompt templates for Agent Ninja routing.
 
 The self-assessment prompt is in engine.py (injected via additionalContext).
 The classification prompt template below is used by the CLAUDE.md instruction

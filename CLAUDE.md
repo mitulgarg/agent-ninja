@@ -1,4 +1,4 @@
-# Agent Pilot (agent-ninja)
+# Agent Ninja 
 
 An intelligent Claude Code / Gemini CLI plugin that routes tasks to the right model/agent pattern, observes workflow, and proactively optimizes the development environment.
 
@@ -15,14 +15,14 @@ Single entry point (`scripts/entrypoint.py`) handles ALL hook events — dispatc
 ## Tech Stack
 
 - **Language:** Python 3.8+ (stdlib only — no pip dependencies)
-- **Storage:** Append-only JSONL files in `.agent-pilot/data/`
+- **Storage:** Append-only JSONL files in `.agent-ninja/data/`
 - **Testing:** pytest (dev dependency only)
 - **No external API key required** — all intelligence runs through Claude's own session
 
 ## Project Structure
 
 ```
-agent-pilot/
+agent-ninja/
 ├── .claude-plugin/plugin.json         # Claude Code plugin manifest
 ├── hooks/hooks.json                   # Claude Code hook definitions
 ├── platforms/
@@ -47,7 +47,7 @@ agent-pilot/
 │   └── utils/
 │       ├── io.py                      # stdin/stdout helpers for hooks
 │       └── hash.py                    # (hash_prompt lives in models.py)
-├── skills/pilot-advisor/SKILL.md      # Teaches agent to follow routing
+├── skills/ninja-advisor/SKILL.md      # Teaches agent to follow routing
 ├── agents/strategist.md               # Deep analysis subagent
 ├── commands/                          # Slash command definitions
 │   ├── audit.md                       # /ap:audit
@@ -68,7 +68,7 @@ agent-pilot/
 
 Runtime data (gitignored):
 ```
-.agent-pilot/
+.agent-ninja/
 ├── data/
 │   ├── sessions.jsonl                 # Session observations
 │   ├── routing.jsonl                  # Routing decisions + outcomes
@@ -109,11 +109,11 @@ python3 scripts/run_command.py status
 
 ## Config Precedence (highest to lowest)
 
-1. Environment variables (`AGENT_PILOT_*`)
-2. Project config (`.agent-pilot/config.json`)
+1. Environment variables (`AGENT_NINJA_*`)
+2. Project config (`.agent-ninja/config.json`)
 3. Plugin defaults (`config/defaults.json`)
-4. Hardcoded defaults in `AgentPilotConfig`
+4. Hardcoded defaults in `AgentNinjaConfig`
 
 ## User Setup
 
-Users add the Agent Pilot instructions to their CLAUDE.md — see INSTALL.md for the copy-paste block.
+Users add the Agent Ninja instructions to their CLAUDE.md — see INSTALL.md for the copy-paste block.

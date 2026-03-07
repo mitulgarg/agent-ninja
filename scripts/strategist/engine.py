@@ -9,14 +9,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from core.config import AgentPilotConfig
+from core.config import AgentNinjaConfig
 from core.logger import JsonlLogger
 
 
 class StrategistEngine:
     """Aggregates session data for Claude to analyze via slash commands."""
 
-    def __init__(self, config: AgentPilotConfig, project_dir: str):
+    def __init__(self, config: AgentNinjaConfig, project_dir: str):
         self.config = config
         self.project_dir = project_dir
         self.sessions_log = JsonlLogger(config.data_dir / "sessions.jsonl")
@@ -70,7 +70,7 @@ class StrategistEngine:
         if not summary["total_sessions"] and not summary["total_prompts"]:
             return (
                 "No session data collected yet. "
-                "Use Agent Pilot for a few sessions first."
+                "Use Agent Ninja for a few sessions first."
             )
 
         from strategist.prompts import format_data_summary

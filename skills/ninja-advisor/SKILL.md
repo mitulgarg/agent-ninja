@@ -1,16 +1,16 @@
 ---
-name: pilot-advisor
+name: ninja-advisor
 description: >
-  Interprets Agent Pilot routing recommendations injected via hooks.
-  When you see [Agent Pilot] context in the conversation, follow
+  Interprets Agent Ninja routing recommendations injected via hooks.
+  When you see [Agent Ninja] context in the conversation, follow
   the model/pattern/thinking recommendations. Use when routing
   decisions appear in context, when deciding which model to use,
   or when considering subagents vs direct execution.
 ---
 
-# Agent Pilot Advisor
+# Agent Ninja Advisor
 
-When you see a message starting with `[Agent Pilot]` in the conversation
+When you see a message starting with `[Agent Ninja]` in the conversation
 context, it contains an intelligent routing recommendation based on
 analysis of the current prompt.
 
@@ -25,7 +25,7 @@ The recommendation includes:
 ## Actions to take
 
 1. If `model` differs from your current model, suggest switching:
-   "Agent Pilot recommends using {model} for this task because: {reasoning}.
+   "Agent Ninja recommends using {model} for this task because: {reasoning}.
    You can switch with `/model {model}`."
 
 2. If `pattern` is `subagent`, suggest delegation:
@@ -45,7 +45,7 @@ The recommendation includes:
 
 ## Self-assessment mode
 
-When the `[Agent Pilot]` context asks you to self-assess, briefly evaluate
+When the `[Agent Ninja]` context asks you to self-assess, briefly evaluate
 the task complexity before proceeding:
 - State your model/pattern/thinking assessment in one line
 - If you determine a different model would be better, suggest switching
@@ -53,5 +53,5 @@ the task complexity before proceeding:
 
 ## When auto_switch is enabled
 
-If the user has enabled auto_switch in their agent-pilot config,
+If the user has enabled auto_switch in their agent-ninja config,
 act on the recommendation directly without asking for confirmation.

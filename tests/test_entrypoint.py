@@ -43,7 +43,7 @@ class TestEntrypointE2E:
             output = json.loads(result.stdout)
             assert "hookSpecificOutput" in output
             ctx = output["hookSpecificOutput"]["additionalContext"]
-            assert "[Agent Pilot]" in ctx
+            assert "[Agent Ninja]" in ctx
 
     def test_post_tool_use(self):
         """PostToolUse should log to sessions.jsonl."""
@@ -59,7 +59,7 @@ class TestEntrypointE2E:
         """When routing is disabled, no additionalContext is injected."""
         result = _run_entrypoint(
             "user_prompt_submit.json",
-            env_overrides={"AGENT_PILOT_ROUTING_ENABLED": "false"},
+            env_overrides={"AGENT_NINJA_ROUTING_ENABLED": "false"},
         )
         assert result.returncode == 0
         # Should not output any routing context

@@ -1,10 +1,10 @@
-# Agent Pilot - Setup & Testing Guide
+# Agent Ninja - Setup & Testing Guide
 
 ## Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/mitul-s/agent-pilot.git
-cd agent-pilot
+git clone https://github.com/mitul-s/agent-ninja.git
+cd agent-ninja
 ```
 
 ## Step 2: Create the Hooks File
@@ -17,7 +17,7 @@ Create `~/.claude/hooks.json` (global) or `.claude/hooks.json` (project-level):
     "UserPromptSubmit": [
       {
         "type": "command",
-        "command": "python3 /ABSOLUTE/PATH/TO/agent-pilot/scripts/entrypoint.py",
+        "command": "python3 /ABSOLUTE/PATH/TO/agent-ninja/scripts/entrypoint.py",
         "timeout": 10
       }
     ],
@@ -25,14 +25,14 @@ Create `~/.claude/hooks.json` (global) or `.claude/hooks.json` (project-level):
       {
         "matcher": ".*",
         "type": "command",
-        "command": "python3 /ABSOLUTE/PATH/TO/agent-pilot/scripts/entrypoint.py",
+        "command": "python3 /ABSOLUTE/PATH/TO/agent-ninja/scripts/entrypoint.py",
         "timeout": 5
       }
     ],
     "Stop": [
       {
         "type": "command",
-        "command": "python3 /ABSOLUTE/PATH/TO/agent-pilot/scripts/entrypoint.py",
+        "command": "python3 /ABSOLUTE/PATH/TO/agent-ninja/scripts/entrypoint.py",
         "timeout": 5
       }
     ]
@@ -40,16 +40,16 @@ Create `~/.claude/hooks.json` (global) or `.claude/hooks.json` (project-level):
 }
 ```
 
-Replace `/ABSOLUTE/PATH/TO/agent-pilot` with the actual path where you cloned the repo.
+Replace `/ABSOLUTE/PATH/TO/agent-ninja` with the actual path where you cloned the repo.
 
 ## Step 3: Add Instructions to Your CLAUDE.md
 
 Add the following block to `~/.claude/CLAUDE.md` (global) or your project's `CLAUDE.md`:
 
 ```markdown
-## Agent Pilot - Intelligent Routing
+## Agent Ninja - Intelligent Routing
 
-When you see `[Agent Pilot]` context injected at the start of a conversation turn,
+When you see `[Agent Ninja]` context injected at the start of a conversation turn,
 it contains a routing recommendation. Follow these instructions:
 
 1. **If a direct recommendation is provided** (model/pattern/thinking), acknowledge it
@@ -86,53 +86,53 @@ Try these prompts in order to see each routing behavior:
 ```
 run tests
 ```
-Expected: `[Agent Pilot] Recommended: model=haiku, pattern=direct, thinking=off`
+Expected: `[Agent Ninja] Recommended: model=haiku, pattern=direct, thinking=off`
 
 ### Static rule → Opus (complex task)
 ```
 architect a new authentication system
 ```
-Expected: `[Agent Pilot] Recommended: model=opus, pattern=plan-mode, thinking=high`
+Expected: `[Agent Ninja] Recommended: model=opus, pattern=plan-mode, thinking=high`
 
 ### Static rule → Sonnet + Plan Mode (multi-step)
 ```
 implement a new feature for user notifications
 ```
-Expected: `[Agent Pilot] Recommended: model=sonnet, pattern=plan-mode, thinking=low`
+Expected: `[Agent Ninja] Recommended: model=sonnet, pattern=plan-mode, thinking=low`
 
 ### Self-assessment (ambiguous prompt)
 ```
 help me fix this bug
 ```
-Expected: `[Agent Pilot] No static routing rule matched...` followed by Claude self-assessing before proceeding.
+Expected: `[Agent Ninja] No static routing rule matched...` followed by Claude self-assessing before proceeding.
 
 ## Step 6: Check the Logs
 
-After a few prompts, inspect what Agent Pilot captured:
+After a few prompts, inspect what Agent Ninja captured:
 
 ```bash
 # Routing decisions
-cat .agent-pilot/data/routing.jsonl | python3 -m json.tool --json-lines
+cat .agent-ninja/data/routing.jsonl | python3 -m json.tool --json-lines
 
 # Session events (tool usage, etc.)
-cat .agent-pilot/data/sessions.jsonl | python3 -m json.tool --json-lines
+cat .agent-ninja/data/sessions.jsonl | python3 -m json.tool --json-lines
 
 # Quick status dashboard
-python3 /path/to/agent-pilot/scripts/run_command.py status
+python3 /path/to/agent-ninja/scripts/run_command.py status
 ```
 
 ## Step 7: Try the Slash Commands
 
 After accumulating some session data, try:
 
-- `/ap:status` — Quick dashboard of routing stats and tool usage
-- `/ap:audit` — Deep environment health check with recommendations
-- `/ap:strategize` — Workflow analysis with actionable optimization proposals
-- `/ap:generate-skill` — Generate reusable skills from repeated patterns
+- `/an:status` — Quick dashboard of routing stats and tool usage
+- `/an:audit` — Deep environment health check with recommendations
+- `/an:strategize` — Workflow analysis with actionable optimization proposals
+- `/an:generate-skill` — Generate reusable skills from repeated patterns
 
 ## Optional: Project-Level Configuration
 
-Create `.agent-pilot/config.json` in any project to customize routing rules:
+Create `.agent-ninja/config.json` in any project to customize routing rules:
 
 ```json
 {
@@ -158,16 +158,16 @@ Create `.agent-pilot/config.json` in any project to customize routing rules:
 **No output from hooks?**
 - Test the entrypoint directly:
   ```bash
-  echo '{"hook_event_name":"UserPromptSubmit","user_prompt":"run tests","session_id":"test"}' | python3 /path/to/agent-pilot/scripts/entrypoint.py
+  echo '{"hook_event_name":"UserPromptSubmit","user_prompt":"run tests","session_id":"test"}' | python3 /path/to/agent-ninja/scripts/entrypoint.py
   ```
 - You should see JSON output with `hookSpecificOutput.additionalContext`
 
-**No data in `.agent-pilot/`?**
+**No data in `.agent-ninja/`?**
 - The directory is created relative to `CLAUDE_PROJECT_DIR` (your project root)
-- Check that the directory exists: `ls -la .agent-pilot/data/`
+- Check that the directory exists: `ls -la .agent-ninja/data/`
 
 ## Uninstall
 
-1. Remove the hooks: delete `~/.claude/hooks.json` (or remove the Agent Pilot entries)
-2. Remove the CLAUDE.md block: delete the "Agent Pilot - Intelligent Routing" section
-3. Remove session data: `rm -rf .agent-pilot/` from any projects
+1. Remove the hooks: delete `~/.claude/hooks.json` (or remove the Agent Ninja entries)
+2. Remove the CLAUDE.md block: delete the "Agent Ninja - Intelligent Routing" section
+3. Remove session data: `rm -rf .agent-ninja/` from any projects

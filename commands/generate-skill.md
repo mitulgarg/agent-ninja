@@ -1,5 +1,5 @@
 ---
-name: ap:generate-skill
+name: an:generate-skill
 description: >
   Detect repeated workflow patterns and generate a SKILL.md file.
   Optionally takes a focus area as argument.
@@ -11,7 +11,7 @@ First, gather the session data:
 python3 scripts/run_command.py summary
 ```
 
-Then read the raw session logs at `.agent-pilot/data/sessions.jsonl` to identify repeated tool usage patterns.
+Then read the raw session logs at `.agent-ninja/data/sessions.jsonl` to identify repeated tool usage patterns.
 
 Generate a complete SKILL.md file with:
 - YAML frontmatter with name and description
@@ -22,9 +22,9 @@ Generate a complete SKILL.md file with:
 Save the generated skill:
 
 ```bash
-mkdir -p .agent-pilot/proposed/skills/<skill-name>
+mkdir -p .agent-ninja/proposed/skills/<skill-name>
 ```
 
-Then write the SKILL.md content to `.agent-pilot/proposed/skills/<skill-name>/SKILL.md`.
+Then write the SKILL.md content to `.agent-ninja/proposed/skills/<skill-name>/SKILL.md`.
 
 Tell the user to review the proposed skill and copy it to `.claude/skills/` to activate it.

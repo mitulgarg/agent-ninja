@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""CLI entry point for Agent Pilot slash commands.
+"""CLI entry point for Agent Ninja slash commands.
 
 Usage:
   python3 scripts/run_command.py status
   python3 scripts/run_command.py summary
 
-These are invoked by Claude Code slash commands (/ap:audit, /ap:status, etc.)
+These are invoked by Claude Code slash commands (/an:audit, /an:status, etc.)
 The actual deep analysis is done by Claude reading the output —
 this script just prepares the data."""
 
@@ -29,8 +29,8 @@ def main() -> None:
         os.environ.get("GEMINI_PROJECT_DIR", os.getcwd()),
     )
 
-    from core.config import AgentPilotConfig
-    config = AgentPilotConfig.load(project_dir)
+    from core.config import AgentNinjaConfig
+    config = AgentNinjaConfig.load(project_dir)
 
     from strategist.engine import StrategistEngine
     engine = StrategistEngine(config, project_dir)
