@@ -1,11 +1,11 @@
 ---
-name: ap:audit
+name: an:audit
 description: >
-  Run an Agent Pilot environment health check. Analyzes routing
+  Run an Agent Ninja environment health check. Analyzes routing
   accuracy, model efficiency, context waste, and feature utilization.
 ---
 
-First, run this command to get the current Agent Pilot data:
+First, run this command to get the current Agent Ninja data:
 
 ```bash
 python3 scripts/run_command.py summary
@@ -19,6 +19,6 @@ Then analyze the data and produce a structured audit report covering:
 4. **Self-Assessment Rate**: What percentage of prompts fell through to self-assessment vs. static rules?
 5. **Specific Recommendations**: Ordered by expected impact, with concrete actions.
 
-Also read the routing log at `.agent-pilot/data/routing.jsonl` and session log at `.agent-pilot/data/sessions.jsonl` for deeper patterns.
+Also read the routing log at `.agent-ninja/data/routing.jsonl` and session log at `.agent-ninja/data/sessions.jsonl` for deeper patterns.
 
 Present the audit as a clear, structured report. Highlight the most impactful recommendations first.

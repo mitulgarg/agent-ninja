@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""agent-pilot hook entry point.
+"""agent-ninja hook entry point.
 
 Called by the host agent (Claude Code / Gemini CLI) for every
 lifecycle event. Reads hook JSON from stdin, dispatches to the
@@ -18,6 +18,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from utils.io import read_hook_input, write_hook_output, exit_allow
+from core.config import AgentNinjaConfig
 
 
 def main() -> None:
@@ -25,7 +26,7 @@ def main() -> None:
         _dispatch()
     except Exception as e:
         # Hooks must never crash — fail silently to stderr
-        print(f"[agent-pilot] hook error: {e}", file=sys.stderr)
+        print(f"[agent-ninja] hook error: {e}", file=sys.stderr)
     exit_allow()
 
 
@@ -38,8 +39,7 @@ def _dispatch() -> None:
         os.environ.get("GEMINI_PROJECT_DIR", os.getcwd()),
     )
 
-    from core.config import AgentPilotConfig
-    config = AgentPilotConfig.load(project_dir)
+    config = AgentNinjaConfig.load(project_dir)
 
     # Dispatch based on event type
     if event in ("UserPromptSubmit", "BeforeModel"):
@@ -60,7 +60,7 @@ def _dispatch() -> None:
 
 def _handle_user_prompt(
     hook_input: dict,
-    config: AgentPilotConfig,
+    config: AgentNinjaConfig,
     project_dir: str,
 ) -> None:
     """Route: classify the prompt and inject recommendation or self-assessment."""
@@ -107,7 +107,7 @@ def _handle_user_prompt(
 
 def _handle_post_tool_use(
     hook_input: dict,
-    config: AgentPilotConfig,
+    config: AgentNinjaConfig,
     project_dir: str,
 ) -> None:
     """Observe: capture tool usage metadata."""
@@ -121,7 +121,7 @@ def _handle_post_tool_use(
 
 def _handle_stop(
     hook_input: dict,
-    config: AgentPilotConfig,
+    config: AgentNinjaConfig,
     project_dir: str,
 ) -> None:
     """Observe: finalize session record on stop."""
@@ -135,7 +135,7 @@ def _handle_stop(
 
 def _handle_session_start(
     hook_input: dict,
-    config: AgentPilotConfig,
+    config: AgentNinjaConfig,
     project_dir: str,
 ) -> None:
     """Initialize session tracking."""
@@ -149,7 +149,7 @@ def _handle_session_start(
 
 def _handle_session_end(
     hook_input: dict,
-    config: AgentPilotConfig,
+    config: AgentNinjaConfig,
     project_dir: str,
 ) -> None:
     """Cleanup and final logging."""

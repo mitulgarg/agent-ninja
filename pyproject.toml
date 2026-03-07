@@ -1,5 +1,5 @@
 [project]
-name = "agent-pilot"
+name = "agent-ninja"
 version = "1.0.0"
 description = "Intelligent routing, workflow observation, and proactive optimization for AI coding agents"
 requires-python = ">=3.8"

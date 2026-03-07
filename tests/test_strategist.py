@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 
-from core.config import AgentPilotConfig
+from core.config import AgentNinjaConfig
 from core.logger import JsonlLogger
 from strategist.engine import StrategistEngine
 from strategist.prompts import format_data_summary
@@ -19,7 +19,7 @@ class TestStrategistEngine:
 
     def setup_method(self):
         self.tmpdir = tempfile.mkdtemp()
-        self.config = AgentPilotConfig(
+        self.config = AgentNinjaConfig(
             data_dir=Path(self.tmpdir) / "data",
             proposed_dir=Path(self.tmpdir) / "proposed",
         )

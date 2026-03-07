@@ -1,11 +1,11 @@
-# Agent Pilot
+# Agent Ninja
 
 **Intelligent routing, workflow observation, and proactive optimization for AI coding agents.**
 
-Agent Pilot is a Claude Code / Gemini CLI plugin that:
+Agent Ninja is a Claude Code / Gemini CLI plugin that:
 - Routes each prompt to the optimal model tier (haiku/sonnet/opus) using static rules + self-assessment
 - Observes your workflow patterns passively (zero API cost)
-- Provides on-demand optimization via slash commands (`/ap:audit`, `/ap:strategize`, `/ap:generate-skill`)
+- Provides on-demand optimization via slash commands (`/an:audit`, `/an:strategize`, `/an:generate-skill`)
 
 ## Key Features
 
@@ -18,12 +18,12 @@ Agent Pilot is a Claude Code / Gemini CLI plugin that:
 
 ```bash
 # 1. Clone
-git clone https://github.com/mitul-s/agent-pilot.git
+git clone https://github.com/mitulgarg/agent-ninja
 
 # 2. Set up hooks (update path in hooks.json)
 cp hooks/hooks.json ~/.claude/hooks.json
 
-# 3. Add Agent Pilot instructions to your CLAUDE.md
+# 3. Add Agent Ninja instructions to your CLAUDE.md
 # See INSTALL.md for the copy-paste block
 ```
 
@@ -36,7 +36,7 @@ A hook fires on each prompt. Static regex rules handle obvious cases:
 - Ambiguous prompts → Claude self-assesses within its own session
 
 ### Layer 2: Observer (passive)
-Logs tool usage, routing decisions, and session metadata to `.agent-pilot/data/`. Zero API calls.
+Logs tool usage, routing decisions, and session metadata to `.agent-ninja/data/`. Zero API calls.
 
 ### Layer 3: Strategist (on-demand)
 Slash commands that Claude executes using its own capabilities:
@@ -47,7 +47,7 @@ Slash commands that Claude executes using its own capabilities:
 
 ## Configuration
 
-Create `.agent-pilot/config.json` in your project:
+Create `.agent-ninja/config.json` in your project:
 
 ```json
 {

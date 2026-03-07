@@ -10,7 +10,7 @@ from typing import Optional
 
 
 @dataclass
-class AgentPilotConfig:
+class AgentNinjaConfig:
     routing_enabled: bool = True
     auto_switch: bool = True
     default_model: str = "sonnet"
@@ -19,11 +19,11 @@ class AgentPilotConfig:
 
     observer_enabled: bool = True
 
-    data_dir: Path = Path(".agent-pilot/data")
-    proposed_dir: Path = Path(".agent-pilot/proposed")
+    data_dir: Path = Path(".agent-ninja/data")
+    proposed_dir: Path = Path(".agent-ninja/proposed")
 
     @classmethod
-    def load(cls, project_dir: Optional[str] = None) -> AgentPilotConfig:
+    def load(cls, project_dir: Optional[str] = None) -> AgentNinjaConfig:
         """Load config with precedence: env > project config > defaults."""
         config = cls()
 
@@ -37,23 +37,23 @@ class AgentPilotConfig:
 
         # 2. Load project config if exists
         if project_dir:
-            config_path = Path(project_dir) / ".agent-pilot" / "config.json"
+            config_path = Path(project_dir) / ".agent-ninja" / "config.json"
             if config_path.exists():
                 with open(config_path) as f:
                     user_cfg = json.load(f)
                 config._apply_dict(user_cfg)
 
         # 3. Environment overrides (highest precedence)
-        if os.environ.get("AGENT_PILOT_ROUTING_ENABLED") == "false":
+        if os.environ.get("AGENT_NINJA_ROUTING_ENABLED") == "false":
             config.routing_enabled = False
 
-        if os.environ.get("AGENT_PILOT_AUTO_SWITCH") == "false":
+        if os.environ.get("AGENT_NINJA_AUTO_SWITCH") == "false":
             config.auto_switch = False
 
         # Resolve data dirs relative to project directory
         base = Path(project_dir) if project_dir else Path.cwd()
-        config.data_dir = base / ".agent-pilot" / "data"
-        config.proposed_dir = base / ".agent-pilot" / "proposed"
+        config.data_dir = base / ".agent-ninja" / "data"
+        config.proposed_dir = base / ".agent-ninja" / "proposed"
 
         # Ensure data dirs exist
         config.data_dir.mkdir(parents=True, exist_ok=True)

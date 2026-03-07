@@ -1,11 +1,11 @@
-# Agent Pilot - Installation Guide
+# Agent Ninja - Installation Guide
 
 ## Quick Start
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/mitul-s/agent-pilot.git
+git https://github.com/mitulgarg/agent-ninja
 ```
 
 ### 2. Set up hooks
@@ -19,10 +19,10 @@ cp hooks/hooks.json ~/.claude/hooks.json
 
 Or for project-level hooks, copy to your project's `.claude/` directory.
 
-**Important:** Update the `command` paths in `hooks.json` to point to where you cloned agent-pilot:
+**Important:** Update the `command` paths in `hooks.json` to point to where you cloned agent-ninja:
 
 ```json
-"command": "python3 /path/to/agent-pilot/scripts/entrypoint.py"
+"command": "python3 /path/to/agent-ninja/scripts/entrypoint.py"
 ```
 
 ### 3. Add to your CLAUDE.md
@@ -30,9 +30,9 @@ Or for project-level hooks, copy to your project's `.claude/` directory.
 Add the following block to your project's `CLAUDE.md` (or `~/.claude/CLAUDE.md` for global):
 
 ```markdown
-## Agent Pilot - Intelligent Routing
+## Agent Ninja - Intelligent Routing
 
-When you see `[Agent Pilot]` context injected at the start of a conversation turn,
+When you see `[Agent Ninja]` context injected at the start of a conversation turn,
 it contains a routing recommendation. Follow these instructions:
 
 1. **If a direct recommendation is provided** (model/pattern/thinking), acknowledge it
@@ -56,7 +56,7 @@ it contains a routing recommendation. Follow these instructions:
 ### 4. Verify installation
 
 Start a Claude Code session and try a simple prompt like "run tests". You should see
-`[Agent Pilot]` context in the conversation indicating the routing recommendation.
+`[Agent Ninja]` context in the conversation indicating the routing recommendation.
 
 ## For Gemini CLI
 
@@ -68,7 +68,7 @@ cp platforms/gemini_cli.json .gemini/settings.json
 
 ## Configuration
 
-Create `.agent-pilot/config.json` in your project root to customize routing:
+Create `.agent-ninja/config.json` in your project root to customize routing:
 
 ```json
 {
@@ -88,7 +88,7 @@ Create `.agent-pilot/config.json` in your project root to customize routing:
 
 After installation, you can use these commands in Claude Code:
 
-- `/ap:status` — Quick dashboard of routing stats
-- `/ap:audit` — Deep environment health check
-- `/ap:strategize` — Workflow analysis with optimization proposals
-- `/ap:generate-skill` — Generate skills from repeated patterns
+- `/an:status` — Quick dashboard of routing stats
+- `/an:audit` — Deep environment health check
+- `/an:strategize` — Workflow analysis with optimization proposals
+- `/an:generate-skill` — Generate skills from repeated patterns

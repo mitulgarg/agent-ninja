@@ -1,5 +1,5 @@
-# Agent Pilot runtime data
-.agent-pilot/
+# Agent Ninja runtime data
+.agent-ninja/
 
 # Python
 __pycache__/

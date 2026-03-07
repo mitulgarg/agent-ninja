@@ -7,7 +7,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 
 from core.models import ModelTier, AgentPattern, ThinkingLevel
-from core.config import AgentPilotConfig
+from core.config import AgentNinjaConfig
 from router.engine import RouterEngine
 from router.rules import StaticRules
 
@@ -16,7 +16,7 @@ class TestStaticRules:
     """Test pattern-based routing without LLM calls."""
 
     def setup_method(self):
-        self.config = AgentPilotConfig()
+        self.config = AgentNinjaConfig()
         self.rules = StaticRules(self.config)
 
     def test_simple_read_routes_to_haiku(self):
@@ -78,14 +78,14 @@ class TestStaticRules:
         assert result is None
 
     def test_user_override_opus(self):
-        config = AgentPilotConfig(always_opus_for=["database migration"])
+        config = AgentNinjaConfig(always_opus_for=["database migration"])
         rules = StaticRules(config)
         result = rules.match("plan the database migration")
         assert result is not None
         assert result.model == ModelTier.OPUS
 
     def test_user_override_haiku(self):
-        config = AgentPilotConfig(always_haiku_for=["check logs"])
+        config = AgentNinjaConfig(always_haiku_for=["check logs"])
         rules = StaticRules(config)
         result = rules.match("check logs for errors")
         assert result is not None
@@ -96,7 +96,7 @@ class TestRouterEngine:
     """Test the full router engine."""
 
     def setup_method(self):
-        self.config = AgentPilotConfig()
+        self.config = AgentNinjaConfig()
 
     def test_static_match_returns_decision(self):
         engine = RouterEngine(self.config, "/tmp/project")
@@ -113,5 +113,5 @@ class TestRouterEngine:
     def test_self_assess_prompt_returned(self):
         engine = RouterEngine(self.config, "/tmp/project")
         prompt = engine.get_self_assess_prompt()
-        assert "[Agent Pilot]" in prompt
+        assert "[Agent Ninja]" in prompt
         assert "self-assess" in prompt.lower()

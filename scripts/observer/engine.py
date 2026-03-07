@@ -4,14 +4,14 @@ Writes structured JSONL to disk for the strategist to analyze later."""
 
 from __future__ import annotations
 
-from core.config import AgentPilotConfig
+from core.config import AgentNinjaConfig
 from core.logger import JsonlLogger
 
 
 class ObserverEngine:
     """Captures session metadata from hook events."""
 
-    def __init__(self, config: AgentPilotConfig, project_dir: str):
+    def __init__(self, config: AgentNinjaConfig, project_dir: str):
         self.config = config
         self.sessions_log = JsonlLogger(config.data_dir / "sessions.jsonl")
         self.routing_log = JsonlLogger(config.data_dir / "routing.jsonl")

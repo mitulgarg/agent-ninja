@@ -12,14 +12,14 @@ from __future__ import annotations
 
 from typing import Optional
 
-from core.config import AgentPilotConfig
+from core.config import AgentNinjaConfig
 from core.models import (
     RoutingDecision,
     hash_prompt,
 )
 from router.rules import StaticRules
 
-SELF_ASSESS_PROMPT = """[Agent Pilot] No static routing rule matched this prompt. \
+SELF_ASSESS_PROMPT = """[Agent Ninja] No static routing rule matched this prompt. \
 Before proceeding, briefly self-assess this task:
 
 1. **Model**: Would haiku (simple lookup/format/grep), sonnet (standard coding), \
@@ -36,7 +36,7 @@ with `/model <tier>`. If plan-mode is warranted, suggest Shift+Tab twice."""
 class RouterEngine:
     """Classifies prompts via static rules or self-assessment injection."""
 
-    def __init__(self, config: AgentPilotConfig, project_dir: str):
+    def __init__(self, config: AgentNinjaConfig, project_dir: str):
         self.config = config
         self.project_dir = project_dir
         self.rules = StaticRules(config)

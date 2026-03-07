@@ -1,4 +1,4 @@
-"""All data structures used across agent-pilot.
+"""All data structures used across agent-ninja.
 
 Pure dataclasses, no dependencies."""
 
@@ -47,7 +47,7 @@ class RoutingDecision:
     def to_context_string(self) -> str:
         """Format as additionalContext for the agent."""
         lines = [
-            f"[Agent Pilot] Recommended: model={self.model.value}, "
+            f"[Agent Ninja] Recommended: model={self.model.value}, "
             f"pattern={self.pattern.value}, thinking={self.thinking.value}",
             f"Reasoning: {self.reasoning}",
         ]
