@@ -81,6 +81,15 @@ class TestStrategistEngine:
         assert path.read_text() == "# Test Skill\nSome content"
         assert "proposed/skills/test-skill/SKILL.md" in str(path)
 
+    def test_save_proposed_agent(self):
+        path = self.engine.save_proposed_agent(
+            "test-agent",
+            "# Test Agent\nAgent content",
+        )
+        assert path.exists()
+        assert path.read_text() == "# Test Agent\nAgent content"
+        assert "proposed/agents/test-agent.md" in str(path)
+
     def test_status_with_data(self):
         logger = JsonlLogger(self.config.data_dir / "sessions.jsonl")
         logger.log("session_start", {"session_id": "s1"})
