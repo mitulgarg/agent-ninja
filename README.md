@@ -5,7 +5,7 @@
 Agent Ninja is a Claude Code / Gemini CLI plugin that:
 - Routes each prompt to the optimal model tier (haiku/sonnet/opus) using static rules + self-assessment
 - Observes your workflow patterns passively (zero API cost)
-- Provides on-demand optimization via slash commands (`/an:audit`, `/an:strategize`, `/an:generate-skill`)
+- Provides on-demand optimization via slash commands (`/an:audit`, `/an:strategize`, `/an:generate-skill`, `/an:generate-agent`)
 
 ## Key Features
 
@@ -58,6 +58,7 @@ Slash commands that Claude executes using its own capabilities:
 - `/an:audit` — environment health check
 - `/an:strategize` — deep workflow analysis with proposals
 - `/an:generate-skill` — create skills from repeated patterns
+- `/an:generate-agent` — create subagent definitions from complex workflow patterns
 
 ## Configuration
 
@@ -81,10 +82,11 @@ Create `.agent-ninja/config.json` in your project:
 
 Detailed documentation is available in the [`docs/`](docs/) directory:
 
+- **[Walkthrough](docs/walkthrough.md)** — End-to-end setup and live examples of routing, logging, and all slash commands
 - **[Architecture](docs/architecture.md)** — Three-layer design, entry point dispatch, hook lifecycle, data flow
 - **[Routing Reference](docs/routing.md)** — Static rules, regex patterns, self-assessment, additionalContext injection
 - **[Observer Reference](docs/observer.md)** — Captured metadata, JSONL format, command classification, failure detection
-- **[Strategist & Slash Commands](docs/strategist.md)** — `/an:status`, `/an:audit`, `/an:strategize`, `/an:generate-skill`
+- **[Strategist & Slash Commands](docs/strategist.md)** — `/an:status`, `/an:audit`, `/an:strategize`, `/an:generate-skill`, `/an:generate-agent`
 - **[Configuration Reference](docs/configuration.md)** — Precedence chain, all options, environment variables, example configs
 - **[Privacy Design](docs/privacy.md)** — What is/isn't stored, prompt hashing, data retention
 - **[Platform Support](docs/platforms.md)** — Claude Code vs Gemini CLI differences, setup instructions

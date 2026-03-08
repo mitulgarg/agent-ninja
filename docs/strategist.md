@@ -59,7 +59,7 @@ Deep workflow analysis with actionable optimization proposals. Produces:
 
 1. **Skills to Create** -- Repeated multi-step patterns with draft SKILL.md content
 2. **Routing Rule Adjustments** -- New static rules for config.json
-3. **Agent Team Opportunities** -- Sequential tasks that could be parallelized
+3. **Agent Generation Opportunities** -- Sequential tasks that could be parallelized or long tool chains that should be encapsulated into a focused subagent. Flags candidates for `/an:generate-agent`.
 4. **CLAUDE.md Improvements** -- Additions based on workflow patterns
 5. **Context Waste** -- Loaded files/instructions that are rarely relevant
 
@@ -68,6 +68,18 @@ Each proposal includes the actual file content or config to create/modify.
 ### `/an:generate-skill`
 
 Detects repeated workflow patterns and generates a complete SKILL.md file. The generated skill is saved to `.agent-ninja/proposed/skills/<skill-name>/SKILL.md` for human review.
+
+### `/an:generate-agent`
+
+Detects complex workflow patterns that warrant a dedicated subagent and generates a complete agent definition `.md` file. Claude looks for:
+
+- **Long sequential tool chains** — 5+ tool calls on a single concern (e.g. read → grep → read → edit → test) that belong in a focused subagent
+- **Repeated multi-file patterns** — the same file/directory combinations touched across multiple sessions
+- **Parallelizable work** — sequential tasks (e.g. test + lint + type-check) that could run as parallel subagents
+
+The generated agent definition includes YAML frontmatter, a system prompt, workflow steps, expected inputs/outputs, and guardrails. It is saved to `.agent-ninja/proposed/agents/<agent-name>.md` for human review.
+
+To activate: copy the proposed file to `.claude/agents/`.
 
 ## Data Aggregation
 
@@ -87,25 +99,28 @@ The `StrategistEngine.build_data_summary()` method (`scripts/strategist/engine.p
 
 This summary contains only aggregate counts -- no prompt content, file paths, or command text.
 
-## Proposed Skills Workflow
+## Proposed Artifacts Workflow
+
+Both `/an:generate-skill` and `/an:generate-agent` follow the same **proposed, not applied** pattern:
 
 ```
-/an:generate-skill
-        |
-        v
-StrategistEngine.save_proposed_skill()
-        |
-        v
-.agent-ninja/proposed/skills/<name>/SKILL.md   (generated, needs review)
-        |
-        v
-Human reviews the proposed skill
-        |
-        v
-cp to ~/.claude/skills/<name>/SKILL.md         (activated)
+/an:generate-skill                        /an:generate-agent
+        |                                         |
+        v                                         v
+save_proposed_skill()                   save_proposed_agent()
+        |                                         |
+        v                                         v
+proposed/skills/<name>/SKILL.md         proposed/agents/<name>.md
+        |                                         |
+        v                                         v
+Human reviews                           Human reviews
+        |                                         |
+        v                                         v
+cp to .claude/skills/<name>/SKILL.md    cp to .claude/agents/<name>.md
+        (activated)                               (activated)
 ```
 
-Generated skills are always saved to the `proposed/` directory. They are **never automatically activated**. The user must review and manually copy them to their skills directory to enable them.
+Generated artifacts are always saved to the `proposed/` directory. They are **never automatically activated**. The user must review and manually copy them to enable them.
 
 ## The Strategist Subagent
 
