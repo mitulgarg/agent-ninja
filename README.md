@@ -18,28 +18,36 @@ Agent Ninja is a Claude Code / Gemini CLI plugin that:
 
 **Requirements:** Python 3.8+, Claude Code or Gemini CLI
 
+### Step 1 — Clone Agent Ninja (once, anywhere on your machine)
+
+We recommend cloning to `~/tools/` so it's easy to reference from any project.
+(You can clone it anywhere — just use that path in Step 2.)
+
 ```bash
-# 1. Clone
-git clone https://github.com/mitulgarg/agent-ninja
-cd agent-ninja
-
-# 2. Run the installer — it will ask whether to install globally or per-project
-bash install.sh          # macOS / Linux
-.\install.ps1            # Windows (PowerShell)
-
-# 3. Add Agent Ninja instructions to your CLAUDE.md
-# See SETUP.md for the copy-paste block
+git clone https://github.com/mitulgarg/agent-ninja ~/tools/agent-ninja
 ```
 
-### What the installer does
+### Step 2 — Enable it for a project (or globally)
 
-The installer patches `hooks/hooks.json` with the absolute path to your clone and writes it to the right location — no manual path editing needed.
+**To enable inside a specific project:**
+```bash
+cd ~/work/my-project
+bash ~/tools/agent-ninja/install.sh          # macOS / Linux
+~/tools/agent-ninja/install.ps1             # Windows (PowerShell)
+```
 
-**Global install** (`~/.claude/hooks.json`) — Agent Ninja runs in every Claude Code session on your machine.
+**To enable globally (all Claude Code sessions on your machine):**
+```bash
+bash ~/tools/agent-ninja/install.sh          # macOS / Linux
+~/tools/agent-ninja/install.ps1             # Windows (PowerShell)
+# → choose option 1 when prompted
+```
 
-**Project install** (`.claude/hooks.json` inside a project) — Agent Ninja runs only when you open that specific project in Claude Code.
+The installer writes the hook config with the correct path automatically — no manual editing needed. If a `hooks.json` already exists, it will ask before overwriting.
 
-> If you already have a `hooks.json`, the installer will ask before overwriting it.
+### Step 3 — Add instructions to your CLAUDE.md
+
+See [SETUP.md](SETUP.md) for the copy-paste block to add to your project's `CLAUDE.md` (or `~/.claude/CLAUDE.md` for global).
 
 ## How It Works
 
