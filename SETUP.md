@@ -7,25 +7,30 @@
 
 ---
 
-## Step 1: Clone the Repository
+## Step 1: Clone Agent Ninja
+
+Clone it once to a permanent location on your machine. We recommend `~/tools/` so it's easy to reference from any project.
 
 ```bash
-git clone https://github.com/mitulgarg/agent-ninja
-cd agent-ninja
+git clone https://github.com/mitulgarg/agent-ninja ~/tools/agent-ninja
 ```
+
+> You can clone it anywhere — just use that path in Step 2.
 
 ---
 
 ## Step 2: Run the Installer
 
-**macOS / Linux:**
-```bash
-bash install.sh
-```
+The installer wires up the hooks pointing to your clone. Run it from inside the project you want to enable Agent Ninja for:
 
-**Windows (PowerShell):**
-```powershell
-.\install.ps1
+```bash
+cd ~/work/my-project
+
+# macOS / Linux
+bash ~/tools/agent-ninja/install.sh
+
+# Windows (PowerShell)
+~/tools/agent-ninja/install.ps1
 ```
 
 > Windows users: if you see an execution policy error, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then retry.
@@ -38,9 +43,10 @@ Where do you want to install the hooks?
   2) Project — .claude/hooks.json   (current directory only)
 ```
 
-Choose **1** to activate Agent Ninja across all your projects, or **2** to try it in one project first.
+- Choose **1 (Global)** to activate Agent Ninja across all your projects — run from anywhere, only need to do this once.
+- Choose **2 (Project)** to enable it for only the current directory — run from inside that project.
 
-The installer automatically patches the hook config with the correct path — no manual editing needed. If a `hooks.json` already exists at the destination, it will ask before overwriting.
+The installer automatically patches the hook config with the correct path — no manual editing needed. If a `hooks.json` already exists, it will ask before overwriting.
 
 ### For Gemini CLI
 
