@@ -1,46 +1,56 @@
-# Agent Ninja - Setup & Testing Guide
+# Agent Ninja - Setup Guide
+
+## Requirements
+
+- Python 3.8+
+- Claude Code or Gemini CLI
+
+---
 
 ## Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/mitul-s/agent-ninja.git
+git clone https://github.com/mitulgarg/agent-ninja
 cd agent-ninja
 ```
 
-## Step 2: Create the Hooks File
+---
 
-Create `~/.claude/hooks.json` (global) or `.claude/hooks.json` (project-level):
+## Step 2: Run the Installer
 
-```json
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "type": "command",
-        "command": "python3 /ABSOLUTE/PATH/TO/agent-ninja/scripts/entrypoint.py",
-        "timeout": 10
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": ".*",
-        "type": "command",
-        "command": "python3 /ABSOLUTE/PATH/TO/agent-ninja/scripts/entrypoint.py",
-        "timeout": 5
-      }
-    ],
-    "Stop": [
-      {
-        "type": "command",
-        "command": "python3 /ABSOLUTE/PATH/TO/agent-ninja/scripts/entrypoint.py",
-        "timeout": 5
-      }
-    ]
-  }
-}
+**macOS / Linux:**
+```bash
+bash install.sh
 ```
 
-Replace `/ABSOLUTE/PATH/TO/agent-ninja` with the actual path where you cloned the repo.
+**Windows (PowerShell):**
+```powershell
+.\install.ps1
+```
+
+> Windows users: if you see an execution policy error, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then retry.
+
+The installer will ask:
+
+```
+Where do you want to install the hooks?
+  1) Global  — ~/.claude/hooks.json (all Claude Code sessions)
+  2) Project — .claude/hooks.json   (current directory only)
+```
+
+Choose **1** to activate Agent Ninja across all your projects, or **2** to try it in one project first.
+
+The installer automatically patches the hook config with the correct path — no manual editing needed. If a `hooks.json` already exists at the destination, it will ask before overwriting.
+
+### For Gemini CLI
+
+Use the Gemini-specific hook config instead:
+
+```bash
+cp platforms/gemini_cli.json .gemini/settings.json
+```
+
+---
 
 ## Step 3: Add Instructions to Your CLAUDE.md
 
@@ -70,6 +80,8 @@ it contains a routing recommendation. Follow these instructions:
    The routing context is there to help you optimize, not to slow you down.
 ```
 
+---
+
 ## Step 4: Restart Claude Code
 
 Hooks only load on session startup. Open a new terminal and start a fresh session:
@@ -78,33 +90,37 @@ Hooks only load on session startup. Open a new terminal and start a fresh sessio
 claude
 ```
 
+---
+
 ## Step 5: Test It
 
-Try these prompts in order to see each routing behavior:
+Try these prompts to see each routing behavior:
 
-### Static rule → Haiku (simple task)
+### Simple task → Haiku
 ```
 run tests
 ```
 Expected: `[Agent Ninja] Recommended: model=haiku, pattern=direct, thinking=off`
 
-### Static rule → Opus (complex task)
+### Complex task → Opus
 ```
 architect a new authentication system
 ```
 Expected: `[Agent Ninja] Recommended: model=opus, pattern=plan-mode, thinking=high`
 
-### Static rule → Sonnet + Plan Mode (multi-step)
+### Multi-step task → Sonnet
 ```
 implement a new feature for user notifications
 ```
 Expected: `[Agent Ninja] Recommended: model=sonnet, pattern=plan-mode, thinking=low`
 
-### Self-assessment (ambiguous prompt)
+### Ambiguous prompt → Self-assessment
 ```
 help me fix this bug
 ```
 Expected: `[Agent Ninja] No static routing rule matched...` followed by Claude self-assessing before proceeding.
+
+---
 
 ## Step 6: Check the Logs
 
@@ -118,19 +134,23 @@ cat .agent-ninja/data/routing.jsonl | python3 -m json.tool --json-lines
 cat .agent-ninja/data/sessions.jsonl | python3 -m json.tool --json-lines
 
 # Quick status dashboard
-python3 /path/to/agent-ninja/scripts/run_command.py status
+python3 scripts/run_command.py status
 ```
+
+---
 
 ## Step 7: Try the Slash Commands
 
-After accumulating some session data, try:
+After accumulating some session data:
 
 - `/an:status` — Quick dashboard of routing stats and tool usage
 - `/an:audit` — Deep environment health check with recommendations
 - `/an:strategize` — Workflow analysis with actionable optimization proposals
 - `/an:generate-skill` — Generate reusable skills from repeated patterns
 
-## Optional: Project-Level Configuration
+---
+
+## Optional: Custom Configuration
 
 Create `.agent-ninja/config.json` in any project to customize routing rules:
 
@@ -148,23 +168,27 @@ Create `.agent-ninja/config.json` in any project to customize routing rules:
 }
 ```
 
+---
+
 ## Troubleshooting
 
 **Hooks not firing?**
-- Make sure you restarted Claude Code after adding `hooks.json`
-- Verify the path in `hooks.json` is absolute and correct
-- Check that `python3` is available in your PATH
+- Make sure you restarted Claude Code after running the installer
+- Verify the installer completed without errors — re-run it if unsure
+- Check that `python3` is available in your PATH: `python3 --version`
 
 **No output from hooks?**
 - Test the entrypoint directly:
   ```bash
-  echo '{"hook_event_name":"UserPromptSubmit","user_prompt":"run tests","session_id":"test"}' | python3 /path/to/agent-ninja/scripts/entrypoint.py
+  echo '{"hook_event_name":"UserPromptSubmit","user_prompt":"run tests","session_id":"test"}' | python3 scripts/entrypoint.py
   ```
 - You should see JSON output with `hookSpecificOutput.additionalContext`
 
 **No data in `.agent-ninja/`?**
 - The directory is created relative to `CLAUDE_PROJECT_DIR` (your project root)
 - Check that the directory exists: `ls -la .agent-ninja/data/`
+
+---
 
 ## Uninstall
 

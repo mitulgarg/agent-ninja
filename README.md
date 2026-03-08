@@ -16,16 +16,30 @@ Agent Ninja is a Claude Code / Gemini CLI plugin that:
 
 ## Quick Start
 
+**Requirements:** Python 3.8+, Claude Code or Gemini CLI
+
 ```bash
 # 1. Clone
 git clone https://github.com/mitulgarg/agent-ninja
+cd agent-ninja
 
-# 2. Set up hooks (update path in hooks.json)
-cp hooks/hooks.json ~/.claude/hooks.json
+# 2. Run the installer — it will ask whether to install globally or per-project
+bash install.sh          # macOS / Linux
+.\install.ps1            # Windows (PowerShell)
 
 # 3. Add Agent Ninja instructions to your CLAUDE.md
-# See INSTALL.md for the copy-paste block
+# See SETUP.md for the copy-paste block
 ```
+
+### What the installer does
+
+The installer patches `hooks/hooks.json` with the absolute path to your clone and writes it to the right location — no manual path editing needed.
+
+**Global install** (`~/.claude/hooks.json`) — Agent Ninja runs in every Claude Code session on your machine.
+
+**Project install** (`.claude/hooks.json` inside a project) — Agent Ninja runs only when you open that specific project in Claude Code.
+
+> If you already have a `hooks.json`, the installer will ask before overwriting it.
 
 ## How It Works
 
