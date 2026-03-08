@@ -20,7 +20,7 @@ Analyze the workflow patterns and produce actionable proposals:
 
 1. **Skills to Create**: Identify repeated multi-step patterns that should become skills. For each, draft the actual SKILL.md content.
 2. **Routing Rule Adjustments**: Suggest new static rules for the user's `.agent-ninja/config.json` based on patterns in self-assessment data.
-3. **Agent Team Opportunities**: Identify tasks that were done sequentially but could benefit from parallel agent teams.
+3. **Agent Generation Opportunities**: Identify tasks that were done sequentially but could benefit from parallel subagents, or long tool chains that should be encapsulated into a focused agent. Suggest running `/an:generate-agent` for promising candidates.
 4. **CLAUDE.md Improvements**: Suggest additions to the user's CLAUDE.md based on workflow patterns.
 5. **Context Waste**: Identify files/instructions that are loaded but rarely relevant.
 

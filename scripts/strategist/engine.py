@@ -84,6 +84,14 @@ class StrategistEngine:
         skill_path.write_text(content)
         return skill_path
 
+    def save_proposed_agent(self, name: str, content: str) -> Path:
+        """Save a proposed agent to the proposed/ directory."""
+        agents_dir = self.config.proposed_dir / "agents"
+        agents_dir.mkdir(parents=True, exist_ok=True)
+        agent_path = agents_dir / f"{name}.md"
+        agent_path.write_text(content)
+        return agent_path
+
     def _data_age_days(self, records: list[dict]) -> float:
         if not records:
             return 0
