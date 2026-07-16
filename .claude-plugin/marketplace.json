@@ -1,0 +1,28 @@
+{
+  "name": "agent-ninja-marketplace",
+  "owner": {
+    "name": "mitulgarg",
+    "email": "mitulgarg3@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "agent-ninja",
+      "source": "./",
+      "description": "Intelligent routing, workflow observation, and proactive optimization for AI coding agents. Zero API key required, zero external dependencies.",
+      "version": "1.0.0",
+      "author": {
+        "name": "mitulgarg",
+        "email": "mitulgarg3@gmail.com"
+      },
+      "homepage": "https://github.com/mitulgarg/agent-ninja",
+      "category": "productivity",
+      "keywords": [
+        "routing",
+        "observability",
+        "optimization",
+        "model-selection",
+        "workflow"
+      ]
+    }
+  ]
+}

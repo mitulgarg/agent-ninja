@@ -114,7 +114,7 @@ project_dir = os.environ.get(
 
 2. Update the path in `hooks.json` to point to your Agent Ninja installation, or set `CLAUDE_PLUGIN_ROOT`.
 
-3. Add Agent Ninja instructions to your project's `CLAUDE.md` (see `INSTALL.md`).
+3. Add Agent Ninja instructions to your project's `CLAUDE.md` (see `SETUP.md`).
 
 ### Gemini CLI
 

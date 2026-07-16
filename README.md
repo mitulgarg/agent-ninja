@@ -18,6 +18,17 @@ Agent Ninja is a Claude Code / Gemini CLI plugin that:
 
 **Requirements:** Python 3.8+, Claude Code or Gemini CLI
 
+### Option A — Install via Claude Code Marketplace (fastest)
+
+```
+/plugin marketplace add mitulgarg/agent-ninja
+/plugin install agent-ninja
+```
+
+Then add the CLAUDE.md block from [SETUP.md](SETUP.md) Step 3 and restart Claude Code.
+
+### Option B — Manual clone (Gemini CLI, or if you want the repo on disk)
+
 ### Step 1 — Clone Agent Ninja (once, anywhere on your machine)
 
 We recommend cloning to `~/tools/` so it's easy to reference from any project.
