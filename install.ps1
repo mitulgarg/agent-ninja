@@ -75,6 +75,6 @@ Write-Host "Done! Hooks installed to $HooksDest" -ForegroundColor Green
 Write-Host ""
 Write-Host "Next steps:"
 Write-Host "  1. Add the Agent Ninja instructions to your CLAUDE.md"
-Write-Host "     See INSTALL.md for the copy-paste block."
+Write-Host "     See SETUP.md for the copy-paste block."
 Write-Host "  2. Start a Claude Code session and try a prompt."
 Write-Host "     You should see [Agent Ninja] context in the response."

@@ -8,7 +8,7 @@ Three layers, zero external API cost:
 
 - **Router** (Layer 1) — Static regex rules classify obvious prompts (haiku/sonnet/opus). For ambiguous prompts, injects a self-assessment prompt via `additionalContext` so Claude classifies itself within its own session.
 - **Observer** (Layer 2) — Passive session logging to JSONL. No API calls, no token cost. Captures tool usage metadata, routing decisions, session lifecycle.
-- **Strategist** (Layer 3) — On-demand analysis via Claude Code slash commands (`/ap:audit`, `/ap:strategize`, `/ap:generate-skill`). Claude reads the JSONL logs and analyzes patterns using its own session — no separate API key needed.
+- **Strategist** (Layer 3) — On-demand analysis via Claude Code slash commands (`/an:audit`, `/an:strategize`, `/an:generate-skill`, `/an:generate-agent`). Claude reads the JSONL logs and analyzes patterns using its own session — no separate API key needed.
 
 Single entry point (`scripts/entrypoint.py`) handles ALL hook events — dispatches based on `hook_event_name` from stdin JSON.
 
@@ -50,10 +50,11 @@ agent-ninja/
 ├── skills/ninja-advisor/SKILL.md      # Teaches agent to follow routing
 ├── agents/strategist.md               # Deep analysis subagent
 ├── commands/                          # Slash command definitions
-│   ├── audit.md                       # /ap:audit
-│   ├── strategize.md                  # /ap:strategize
-│   ├── generate-skill.md              # /ap:generate-skill
-│   └── status.md                      # /ap:status
+│   ├── audit.md                       # /an:audit
+│   ├── strategize.md                  # /an:strategize
+│   ├── generate-skill.md              # /an:generate-skill
+│   ├── generate-agent.md              # /an:generate-agent
+│   └── status.md                      # /an:status
 ├── config/defaults.json               # Default routing rules
 ├── tests/
 │   ├── test_router.py
@@ -62,7 +63,7 @@ agent-ninja/
 │   ├── test_entrypoint.py
 │   └── fixtures/                      # Sample hook input JSON
 ├── pyproject.toml
-├── INSTALL.md                         # User installation guide
+├── SETUP.md                           # User installation guide
 └── README.md
 ```
 
@@ -116,4 +117,4 @@ python3 scripts/run_command.py status
 
 ## User Setup
 
-Users add the Agent Ninja instructions to their CLAUDE.md — see INSTALL.md for the copy-paste block.
+Users add the Agent Ninja instructions to their CLAUDE.md — see SETUP.md for the copy-paste block.

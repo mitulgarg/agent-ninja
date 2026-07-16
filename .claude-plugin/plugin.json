@@ -3,5 +3,9 @@
   "version": "1.0.0",
   "description": "Intelligent routing, workflow observation, and proactive optimization for AI coding agents",
   "homepage": "https://github.com/mitulgarg/agent-ninja",
+  "author": {
+    "name": "mitulgarg",
+    "email": "mitulgarg3@gmail.com"
+  },
   "hooks": "./hooks/hooks.json"
 }
